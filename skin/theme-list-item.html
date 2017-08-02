@@ -1,0 +1,113 @@
+<!--
+<theme-list-item item="">
+</theme-list-item>
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../skin/theme-img.html">
+
+<dom-module id="theme-list-item">
+  <template>
+    <a href$="[[item.href]]">
+      <theme-img src="[[item.imageUrl]]" alt="[[item.headline]]"></theme-img>
+      <div class="headline">
+        <div class="category" hidden$="[[!item.category]]">[[item.category]]</div>
+        <h2>[[item.headline]]</h2>
+        <div class="details">
+          <div class="time-ago">[[item.timeAgo]]</div>
+          <div class="author">[[item.author]]</div>
+        </div>
+      </div>
+    </a>
+
+    <style>
+      :host {
+        display: block;
+      }
+      a {
+        display: block;
+        position: relative;
+        text-decoration: none;
+        color: inherit;
+        overflow: hidden;
+      }
+      theme-img {
+        height: 150px;
+      }
+      h2 {
+        margin: 18px 0;
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 28px;
+      }
+      .category {
+        padding: 6px 20px 7px;
+        border: var(--app-border-style);
+        display: inline-block;
+        font-weight: bold;
+        font-size: 11px;
+      }
+      .category[hidden] {
+        visibility: hidden;
+        height: 0px;
+        margin-top: 0px;
+        padding: 0px;
+      }
+      .details {
+        @apply --layout-horizontal;
+        font-size: 11px;
+        font-weight: bold;
+      }
+      .time-ago {
+        white-space: nowrap;
+      }
+      .author {
+        padding-left: 35px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      /* mobile */
+      @media (max-width: 767px) {
+        theme-img {
+          display: none;
+        }
+      }
+      /* desktop */
+      @media (min-width: 768px) {
+        :host([horizontal]) {
+          margin-bottom: 24px;
+        }
+        .category {
+          margin-top: 20px;
+        }
+      }
+      /* desktop large */
+      @media (min-width: 1310px) {
+        :host([horizontal]) a {
+          @apply --layout-horizontal;
+        }
+        :host([horizontal]) theme-img {
+          min-width: 150px;
+          margin-right: 24px;
+        }
+        :host([horizontal]) .category {
+          display: none;
+        }
+      }
+    </style>
+  </template>
+  
+  <script>
+    class ThemeListItem extends Polymer.Element {
+      static get is() { return 'theme-list-item'; }
+      static get properties() { return {
+        item: {
+          type: Object
+        }
+      }}
+    }
+    customElements.define(ThemeListItem.is, ThemeListItem);
+  </script>
+</dom-module>

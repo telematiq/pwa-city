@@ -1,0 +1,74 @@
+<!--
+<theme-warning-network offline="">
+</theme-warning-network>
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../skin/theme-icons.html">
+
+<dom-module id="theme-warning-network">
+  <template>
+    <iron-icon icon="cloud-off"></iron-icon>
+    <div hidden$="[[offline]]">
+      <h1>Cannot reach the server</h1>
+    </div>
+    <div hidden$="[[!offline]]">
+      <h1>No Internet connection</h1>
+      <p>Check if your device is connected to a mobile network or WiFi.</p>
+    </div>
+    <button on-click="_tryReconnect">Try Again</button>    
+
+    <style>
+      :host {
+        display: block;
+        padding: 120px 20px;
+        text-align: center;
+      }
+      [hidden] {
+        display: none !important;
+      }
+      iron-icon {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+      }
+      h1 {
+        font-weight: 300;
+      }
+      button {
+        background: transparent;
+        border: var(--app-button-border-style);
+        padding: 10px 20px;
+        font-weight: 600;
+        color: inherit;
+      }
+      /* mobile */
+      @media (max-width: 767px) {
+        :host {
+          box-sizing: border-box;
+          height: 100vh;
+          background: var(--app-nav-background-color);
+          color: var(--app-nav-text-color);
+        }
+        button {
+          border: 2px solid var(--app-nav-text-color);
+          color: var(--app-nav-text-color);
+        }
+      }
+    </style>
+  </template>
+  
+  <script>
+    class ThemeWarningNetwork extends Polymer.Element {
+      static get is() { return 'theme-warning-network'; }
+      static get properties() { return {
+        offline: Boolean
+      }}
+      _tryReconnect() {
+        this.dispatchEvent(new CustomEvent('try-reconnect', {composed: true}));
+      }
+    }
+    customElements.define(ThemeWarningNetwork.is, ThemeWarningNetwork);
+  </script>
+</dom-module>

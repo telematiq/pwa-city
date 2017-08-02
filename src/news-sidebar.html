@@ -1,0 +1,97 @@
+<!--
+<news-sidebar>
+</news-sidebar>
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="../skin/theme-iframe.html">
+<link rel="import" href="../skin/theme-side-list.html">
+
+<dom-module id="news-sidebar">
+  <template>
+    <aside>
+      <div class="ad-container">
+        <theme-iframe src=""
+          zsrc="//rcm-na.amazon-adsystem.com/e/cm?o=1&p=12&l=ur1&f=ifr">
+        </theme-iframe>
+      </div>
+      
+      <a href="#" class="share-link" aria-label="Send by email">
+        <iron-icon icon="mail"></iron-icon> Email
+      </a>
+      
+      <a href="#" class="share-link" aria-label="Share on social networks">
+        <iron-icon icon="share"></iron-icon> Share
+      </a>
+      
+      <theme-side-list class="fade-in" 
+        items="[[lista]]">
+        Most Read
+      </theme-side-list>
+      
+      <theme-side-list class="fade-in" featured 
+        items="[[listb]]">
+        Top Stories
+      </theme-side-list>
+    </aside>
+ 
+    <style>
+      :host {
+        display: block;
+        margin-left: 24px;
+        width: 300px;
+        font-style: italic;
+      }
+      theme-side-list {
+        margin-bottom: 32px;
+      }
+      theme-iframe {
+        width: 300px;
+        height: 250px;
+        border: 1px solid red;
+      }
+      .share-link {
+        display: inline-block;
+        margin-right: 24px;
+        margin-bottom: 24px;
+        color: inherit;
+        font-size: 11px;
+        font-weight: bold;
+        text-decoration: none;
+      }
+      .share-link iron-icon {
+        margin-right: 8px;
+      }
+      .ad-container {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 24px;
+      }
+      /* mobile */
+      @media (max-width: 767px) {
+        :host {
+          display: block;
+          margin-left: auto;
+          width: auto;
+          padding: 0 24px;
+        }
+        .share-link {
+          display: none;
+        }
+      }
+    </style>
+  </template>
+  
+  <script>
+    class NewsSidebar extends Polymer.Element {
+      static get is() { return 'news-sidebar'; }
+      static get properties() { return {
+        article: Object,
+        lista: Object,
+        listb: Object,
+      }}
+    }
+    customElements.define(NewsSidebar.is, NewsSidebar);
+  </script>
+</dom-module>
